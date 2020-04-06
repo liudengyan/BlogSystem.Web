@@ -1,0 +1,31 @@
+﻿@using Webdiyer.WebControls.Mvc
+@using BlogSystem.Dto
+@model PagedList<ArticleDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("发表文章", "Creat")
+</p>
+
+
+@foreach (var item in Model)
+{
+    <div>
+        <h3>@item.Title</h3>
+        <p>
+            @Html.Raw(item.Content)
+        </p>
+        <span>@item.CreatTime  @item.UserEmail</span>
+
+    </div>
+}
+<div class="text-center">
+    <nav>
+        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "bootstrappager" })
+    </nav>
+</div>
